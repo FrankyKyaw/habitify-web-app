@@ -9,6 +9,8 @@ import { auth } from "./firebase-config";
 import Layout from "./Navigation/Layout";
 import { AuthProvider } from "./contexts/AuthContext";
 import { useAuth } from "./contexts/AuthContext";
+import AllHabitsPage from "./pages/AllHabitsPage";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   const { currentUser } = useAuth();
@@ -21,7 +23,7 @@ function App() {
   //     navigate("/login");
   //   });
   // };
-  
+
   return (
     <div>
       <AuthProvider>
@@ -37,6 +39,12 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/newhabit" element={<NewHabitPage />} />
+          </Routes>
+          <Routes>
+            <Route path="/allhabits" element={<AllHabitsPage />} />
+          </Routes>
+          <Routes>
+            <Route path="/signup" element={<SignUpPage />} />
           </Routes>
         </Layout>
       </AuthProvider>
