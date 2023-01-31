@@ -85,7 +85,7 @@ export default function LoginPage() {
             Sign in with Google
           </button>
           <div className="pt-3 w-full text-center underline">
-              <Link to="/authpage">Create an account</Link>
+              <Link to="/signup">Create an account</Link>
             </div>
         </div>
       </div>
