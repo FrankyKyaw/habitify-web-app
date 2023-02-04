@@ -30,10 +30,10 @@ export default function NavBar() {
     }
   }
   return (
-    <header>
-      <nav className="p-5 bg-white shadow flex items-center justify-between">
+    <header className="px-28 bg-orange-100">
+      <nav className="p-7  flex items-center justify-between">
         <div>
-          <Link to="/" className="text-2xl">
+          <Link to="/" className="text-3xl">
             Habitify
           </Link>
         </div>

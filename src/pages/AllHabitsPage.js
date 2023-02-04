@@ -1,48 +1,35 @@
-
-import { collection, doc, onSnapshot } from 'firebase/firestore'
-import React, { Fragment, useEffect, useState } from 'react'
-import HabitItem from '../components/HabitItem';
-import HabitList from '../components/HabitList';
-import { useAuth } from '../contexts/AuthContext'
-import { db } from '../firebase-config'
+import { collection, doc, getDocs, onSnapshot } from "firebase/firestore";
+import React, { Fragment, useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import HabitItem from "../components/HabitItem";
+import HabitList from "../components/HabitList";
+import { useAuth } from "../contexts/AuthContext";
+import { auth, db } from "../firebase-config";
+import useCollection from "../hooks/useCollection";
+import HabitDetail from "./HabitDetail";
 
 export default function AllHabitsPage() {
   const { currentUser } = useAuth();
   const [habits, setHabits] = useState([]);
 
-  const getHabits = () => {
-    
-    onSnapshot(collection(db, "habits"), (snapshot) => { 
-      let data = []
-      snapshot.docs.forEach((doc) => {
-        data.push(doc.data())
-        
-      })
-      data.forEach(items => {
-        
-        if (items.author_id === currentUser.uid) {
-          setHabits([{
-            title: items.title,
-            description: items.postText
-          }]) 
-          
-        } else {
-          console.log(currentUser.uid)
-        }
-
+  useEffect(() => {
+    if (currentUser) {
+      const ref = collection(db, `users/${currentUser.uid}/habits`);
+      getDocs(ref).then((snapshot) => {
+        let results = [];
+        snapshot.docs.forEach((doc) => {
+          results.push({ id: doc.id, ...doc.data() });
+        });
+        setHabits(results);
+        console.log(results);
       });
-    })
-  }
-
-
-
-  let content = <HabitList habits={habits}/>
+    }
+  }, [currentUser]);
   return (
-    <Fragment>
-      <button onClick={getHabits}>Click here to test</button>
-      <section>
-        {content}
+    <div className="flex flex-col h-screen my-auto items-center p-10">
+      <section className="w-1/2 ">
+        <HabitList habits={habits} />
       </section>
-    </Fragment>
-  )
+    </div>
+  );
 }

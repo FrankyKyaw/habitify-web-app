@@ -5,7 +5,7 @@ export default function Layout(props) {
   return (
     <Fragment>
         <NavBar/>
-        <body>{props.children}</body>
+        <body className=" overflow-hidden bg-orange-100">{props.children}</body>
     </Fragment>
 
   )
