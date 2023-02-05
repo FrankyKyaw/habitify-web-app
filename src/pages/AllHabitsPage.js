@@ -6,7 +6,7 @@ import HabitList from "../components/HabitList";
 import { useAuth } from "../contexts/AuthContext";
 import { auth, db } from "../firebase-config";
 import useCollection from "../hooks/useCollection";
-import HabitDetail from "./HabitDetail";
+
 
 export default function AllHabitsPage() {
   const { currentUser } = useAuth();
@@ -21,14 +21,13 @@ export default function AllHabitsPage() {
           results.push({ id: doc.id, ...doc.data() });
         });
         setHabits(results);
-        console.log(results);
       });
     }
   }, [currentUser]);
   return (
     <div className="flex flex-col h-screen my-auto items-center p-10">
       <section className="w-1/2 ">
-        <HabitList habits={habits} />
+        <HabitList habits={habits} /> 
       </section>
     </div>
   );

@@ -11,7 +11,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { useAuth } from "./contexts/AuthContext";
 import AllHabitsPage from "./pages/AllHabitsPage";
 import SignUpPage from "./pages/SignUpPage";
-import HabitDetail from "./pages/HabitDetail";
+import HabitPage from "./pages/HabitPage";
 
 function App() {
   const { currentUser } = useAuth();
@@ -39,7 +39,7 @@ function App() {
             <Route exact path="/allhabits" element={<AllHabitsPage />} >
               
             </Route>
-            <Route path="/allhabits/:id" element={<HabitDetail />}/>
+            <Route path="/allhabits/:id" element={<HabitPage />}/>
 
             <Route path="/signup" element={<SignUpPage />} />
           </Routes>
