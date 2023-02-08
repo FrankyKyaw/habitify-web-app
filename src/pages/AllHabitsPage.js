@@ -12,7 +12,7 @@ export default function AllHabitsPage() {
   const { currentUser } = useAuth();
   const [habits, setHabits] = useState([]);
 
-  const [style, setStyle] = useState({ width: "40%" });
+  const [style, setStyle] = useState({ width: "50%" });
   useEffect(() => {
     if (currentUser) {
       const ref = collection(db, `users/${currentUser.uid}/habits`);
@@ -33,7 +33,7 @@ export default function AllHabitsPage() {
           style={style}
         >
           {" "}
-          45%
+          50%
         </div>
         </div>
       <section className="w-1/2 ">
