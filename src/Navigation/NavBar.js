@@ -30,7 +30,7 @@ export default function NavBar() {
     }
   }
   return (
-    <header className="px-28 bg-orange-100">
+    <header className="px-28 bg-orange-50">
       <nav className="p-7  flex items-center justify-between">
         <div>
           <Link to="/" className="text-3xl">
