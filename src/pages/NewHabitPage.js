@@ -10,6 +10,7 @@ export default function NewHabitPage() {
 
   const { currentUser } = useAuth();
   let navigate = useNavigate();
+
   const createPost = async () => {
     if (currentUser) {
       const habitsCollectionRef = collection(
@@ -29,7 +30,9 @@ export default function NewHabitPage() {
         days: 123,
         completed: false
       });
+      setTitle("")
       navigate("/allhabits");
+      
     }
    
   };
@@ -44,6 +47,7 @@ export default function NewHabitPage() {
         <div className="flex justify-between w-full h-16">
           <input
             className="w-11/12  border p-2"
+            value={title}
             placeholder="Add a habit"
             onChange={(e) => {
               setTitle(e.target.value);
