@@ -13,20 +13,27 @@ export default function AllHabitsPage() {
   const { currentUser } = useAuth();
   const [habits, setHabits] = useState([]);
 
+  const [habitCount, setHabitCount] = useState(0);
+
   const [style, setStyle] = useState({ width: "50%" });
-  
+
   useEffect(() => {
     if (currentUser) {
       const ref = collection(db, `users/${currentUser.uid}/habits`);
       getDocs(ref).then((snapshot) => {
         let results = [];
         snapshot.docs.forEach((doc) => {
-          results.push({ id: doc.id, ...doc.data() });
+          console.log(doc)
+          if (!doc.data().completed) {
+            results.push({ id: doc.id, ...doc.data() });
+          }
+          
         });
+        setHabitCount(results.length);
         setHabits(results);
       });
     }
-  }, [currentUser]);
+  }, [currentUser, habits, habitCount]);
   return (
     
     <div className="flex flex-col space-y-6 h-screen my-auto items-center p-10">
@@ -41,7 +48,7 @@ export default function AllHabitsPage() {
         </div>
         </div>
       <section className="w-1/2 ">
-        <p>You have 4 habits left to practice.</p>
+        <p>You have {habitCount} habits left to practice.</p>
         <HabitList habits={habits} />
       </section>
       
