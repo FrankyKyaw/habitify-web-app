@@ -59,16 +59,6 @@ export default function NavBar() {
             )}
           </li>
           <li className="mx-4">
-            {currentUser && (
-              <Link
-                to="/newhabit"
-                className="text-xl hover:text-cyan-500 duration"
-              >
-                Add Habit
-              </Link>
-            )}
-          </li>
-          <li className="mx-4">
             {!currentUser && (
               <Link
                 to="/login"

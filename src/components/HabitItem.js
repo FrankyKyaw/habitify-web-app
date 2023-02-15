@@ -2,8 +2,7 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
-  getDocs,
+  runTransaction,
   updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -17,11 +16,44 @@ export default function HabitItem(props) {
 
   let navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
-  // const ref = collection(db, `users/${currentUser.uid}/habits`);
 
-  const handleCheck = () => {
-    setIsChecked(true);
+  const handleCheck1 = () => {
+    if (currentUser) {
+      try {
+        const updatedHabit = runTransaction(db, (transaction) => {
+          const habitRef = doc(
+            db,
+            "users",
+            `${currentUser.uid}`,
+            "habits",
+            `${props.id}`
+          );
+          const doc = transaction.get(habitRef);
+          const newStreak = doc.data().streak.current + 1;
+          transaction.update(habitRef, { completed: true, streak: { current: newStreak } });
+          return newStreak;
+        });
+
+      } catch (e) {
+        console.error(e);
+      }
+    }
   };
+  // const handleCheck = async () => {
+  //   if (currentUser) {
+  //     const habitRef = doc(
+  //       db,
+  //       "users",
+  //       `${currentUser.uid}`,
+  //       "habits",
+  //       `${props.id}`
+  //     );
+  //     await updateDoc(habitRef, {
+  //       "completed": true
+  //     })
+  //   }
+  //   setIsChecked(true);
+  // };
 
   const onDelete = async () => {
     if (currentUser) {
@@ -34,7 +66,6 @@ export default function HabitItem(props) {
       );
       await deleteDoc(habitRef);
       navigate("/allhabits");
-      
     }
   };
   return (
@@ -45,6 +76,7 @@ export default function HabitItem(props) {
             className="my-auto transform scale-125"
             type="checkbox"
             name="sfg"
+            onClick={handleCheck1}
           />
         </label>
         <Link to={`/allhabits/${props.id}`}>

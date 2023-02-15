@@ -23,7 +23,6 @@ export default function AllHabitsPage() {
       getDocs(ref).then((snapshot) => {
         let results = [];
         snapshot.docs.forEach((doc) => {
-          console.log(doc)
           if (!doc.data().completed) {
             results.push({ id: doc.id, ...doc.data() });
           }
@@ -34,6 +33,8 @@ export default function AllHabitsPage() {
       });
     }
   }, [currentUser, habits, habitCount]);
+
+
   return (
     
     <div className="flex flex-col space-y-6 h-screen my-auto items-center p-10">

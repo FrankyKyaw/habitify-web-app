@@ -19,8 +19,9 @@ export default function HabitPage() {
           .filter((doc) => doc.id === id)[0]
           .data();
         let res = [];
-        res.push({ id: specificDoc.author.id, title: specificDoc.title });
+        res.push({ id: specificDoc.author.id, title: specificDoc.title, streak: specificDoc.streak.current });
         setResults(res);
+
         //   snapshot.docs.forEach(doc => {
         //     console.log(doc.data())
         //     if (doc.data().id === id) {
@@ -43,8 +44,8 @@ export default function HabitPage() {
     <div className="flex flex-col h-screen my-auto items-center p-10">
       {results.length > 0 && (
         <section>
-          <div>{results[0].title}</div>
-          <div>{results[0].id}</div>
+          <div>Title: {results[0].title}</div>
+          <div>Current Streak: {results[0].streak}</div>
         </section>
       )}
     </div>
