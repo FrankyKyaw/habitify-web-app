@@ -2,8 +2,8 @@ import React from "react";
 
 export default function HomePage() {
   return (
-    <div className='px-32 pt-52 pb-80'>
-    <div className="flex flex-col space-y-12">
+    <div className='h-screen px-32 pt-52 pb-80'>
+    <div className="flex flex-col items-center space-y-12">
       <div className="flex flex-col max-w-[650px]">
         <h1 className="text-5xl font-bold ">
           Make your habits more consistent.

@@ -15,24 +15,39 @@ export default function AllHabitsPage() {
 
   const [habitCount, setHabitCount] = useState(0);
 
-  const [style, setStyle] = useState({ width: "50%" });
+  const [style, setStyle] = useState({});
 
   useEffect(() => {
     if (currentUser) {
       const ref = collection(db, `users/${currentUser.uid}/habits`);
+
       getDocs(ref).then((snapshot) => {
         let results = [];
-        snapshot.docs.forEach((doc) => {
-          if (!doc.data().completed) {
-            results.push({ id: doc.id, ...doc.data() });
-          }
+        const totalCount = snapshot.size
+        const completedCount = snapshot.docs.filter((doc) => doc.data().completed).length;
+        const incompleteCount = totalCount - completedCount
+
+
+        const percentage = Math.round((completedCount / totalCount) * 100);
+
+        setStyle({ width: `${percentage}%` });
+
+        setHabitCount(incompleteCount)  
+
+        setHabits(
+          snapshot.docs
+            .filter((doc) => !doc.data().completed)
+            .map((doc) => ({ id: doc.id, ...doc.data() }))
+        );
+        // snapshot.docs.forEach((doc) => {
+        //   if (!doc.data().completed) {
+        //     results.push({ id: doc.id, ...doc.data() });
+        //   }
           
-        });
-        setHabitCount(results.length);
-        setHabits(results);
+        // });
       });
     }
-  }, [currentUser, habits, habitCount]);
+  }, [currentUser, habits]);
 
 
   return (
@@ -45,7 +60,7 @@ export default function AllHabitsPage() {
           style={style}
         >
           {" "}
-          50%
+          {style.width}
         </div>
         </div>
       <section className="w-1/2 ">

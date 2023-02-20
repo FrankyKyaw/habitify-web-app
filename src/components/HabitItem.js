@@ -17,10 +17,10 @@ export default function HabitItem(props) {
   let navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheck1 = () => {
+  const handleCheck1 = async () => {
     if (currentUser) {
       try {
-        const updatedHabit = runTransaction(db, (transaction) => {
+        const updatedHabit = await runTransaction(db, async (transaction) => {
           const habitRef = doc(
             db,
             "users",
@@ -28,8 +28,8 @@ export default function HabitItem(props) {
             "habits",
             `${props.id}`
           );
-          const doc = transaction.get(habitRef);
-          const newStreak = doc.data().streak.current + 1;
+          const habitDoc = await transaction.get(habitRef);
+          const newStreak = habitDoc.data().streak.current + 1;
           transaction.update(habitRef, { completed: true, streak: { current: newStreak } });
           return newStreak;
         });
