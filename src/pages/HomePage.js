@@ -10,7 +10,7 @@ export default function HomePage() {
         </h1>
         <p className="pt-6 italic text-2xl font-medium">
           "The key to expertise in any skill is in simply practicing at least
-          10,000 hours. and have fun while doing them."   
+          10,000 hours."   
         </p>
         <span className="pt-4 italic mt-6 text-xl font-medium">Malcolm Gladwell</span>
       </div>

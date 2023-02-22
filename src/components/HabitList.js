@@ -5,7 +5,7 @@ export default function HabitList(props) {
   return (
     <ul className="space-y-6 ">
       {props.habits.map((habit) => (
-        <HabitItem title={habit.title} id={habit.id}/>
+        <HabitItem title={habit.title} key={habit.id} id={habit.id}/>
       ))}
     </ul>
   );

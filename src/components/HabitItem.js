@@ -39,21 +39,6 @@ export default function HabitItem(props) {
       }
     }
   };
-  // const handleCheck = async () => {
-  //   if (currentUser) {
-  //     const habitRef = doc(
-  //       db,
-  //       "users",
-  //       `${currentUser.uid}`,
-  //       "habits",
-  //       `${props.id}`
-  //     );
-  //     await updateDoc(habitRef, {
-  //       "completed": true
-  //     })
-  //   }
-  //   setIsChecked(true);
-  // };
 
   const onDelete = async () => {
     if (currentUser) {
