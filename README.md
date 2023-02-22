@@ -2,6 +2,4 @@ Habitify
 
 A web application created with React, Tailwind and Firebase. Allows users to create an account, login and keep track of their habits.
 
-![app](https://github.com/FrankyKyaw/habitify-web-app/blob/master/myhabits.png)
-
-
+![ezgif com-crop](https://user-images.githubusercontent.com/73188846/220493218-a06b40f6-f1c2-41b7-816b-4aaedd02ceff.gif)
